@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学生時代に力をいれたことサイト</title>
+    <style>
+    /* リセットと基本設定 */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    /* 基本レイアウト */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        color: #333;
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+    }
+
+    /* ヘッダー */
+    h1 {
+        color: #344ab0;
+        text-align: center;
+    }
+
+    /* セクション共通 */
+    .section {
+        background-color: #fff;
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* セクション見出し */
+    .section h2 {
+        font-size: 1.2em;
+        margin-bottom: 10px;
+        color: #3553ad;
+    }
+
+    /* セクション段落 */
+    .section p {
+        margin-bottom: 10px;
+    }
+
+    /* フォーム要素 */
+    textarea {
+        width: 100%;
+        height: 80px;
+        margin-bottom: 5px;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        resize: none;
+    }
+
+    /* ボタン共通 */
+    .speech-button,
+    .save-button {
+        background-color: #3743ad;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 5px;
+    }
+
+    /* ボタンホバー状態 */
+    .speech-button:hover,
+    .save-button:hover {
+        background-color: #3451a9;
+    }
+
+    /* 文字数カウンター */
+    .char-count {
+        font-size: 0.9em;
+        color: #666;
+    }
+
+    /* 合計文字数表示 */
+    #total-char-count {
+        background-color: #3348a1;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    /* レスポンシブ対応 */
+    @media screen and (max-width: 768px) {
+        body {
+            padding: 10px;
+        }
+
+        .section {
+            padding: 10px;
+        }
+
+        textarea {
+            height: 100px;
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        body {
+            padding: 5px;
+        }
+
+        h1 {
+            font-size: 1.5em;
+        }
+
+        .section h2 {
+            font-size: 1.1em;
+        }
+
+        .speech-button,
+        .save-button {
+            width: 100%;
+            margin-bottom: 5px;
+        }
+    }
+    </style>
+</head>
+<body>
+    <h1>学生時代に力をいれたことの作成プログラムサポート</h1>
+
+    <div class="section">
+        <h2>読み上げのスピードコントロール</h2>
+        <label for="speedControl">読み上げ速度:</label>
+        <input type="range" id="speedControl" min="0.5" max="2" value="1.4" step="0.1">
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2>1. 学業の成果を40文字以内で表現しましょう</h2>
+            <p>ゼミ活動での研究や学びを結論先行（ＰＲＥＰ法）でひとことで表現します。学んだ専門知識やスキル、研究成果を意識することです。</p>
+            <p class="example">【記入例】「消費者行動を研究するゼミでマーケティングについて研究しました。」</p>
+            <textarea id="academic-point" placeholder="ここに書きましょう..." data-section-title="1. 学業の成果"></textarea>
+            <div class="char-count" id="academic-point-count">文字数: 0</div>
+            <button class="speech-button" onclick="toggleSpeech(this, 'ゼミでの研究テーマや取り組みを、具体的にひとことで表現してください。例えば、『〇〇の研究を通じて、△△に取り組みました。』というように、具体的な取り組み内容を一文で表現することが重要です。抽象的な表現は避け、具体的な研究テーマを明記するようにしてください。')">書き方のポイント読み上げ</button>
+        </div>
+    
+        <div class="section">
+            <h2>2. 研究テーマに取り組んだきっかけ</h2>
+            <p>ゼミを選択した理由や、特定の研究テーマに興味を持ったきっかけを説明しましょう。</p>
+            <p class="example">【記入例】「消費者行動論のゼミを選んだのは、SNSが購買行動に与える影響について関心があったためです。特に、若者の購買意思決定プロセスに興味を持ちました。」</p>
+            <textarea id="research-motivation" placeholder="ここに書きましょう..." data-section-title="2. 研究テーマに取り組んだきっかけ"></textarea>
+            <div class="char-count" id="research-motivation-count">文字数: 0</div>
+            <button class="speech-button" onclick="toggleSpeech(this, '研究テーマのきっかけを説明する際は、なぜそのゼミを選んだのか、動機を明確に述べることが大切です。『〇〇に興味があり、△△教授のゼミを選択しました』といった具合です。個人的な関心事と研究テーマとの結びつきを示すと、より説得りょくが増しますよ。また、時系列に沿って興味を持った経緯を説明すると、ストーリー性が出て読み手の印象に残りやすくなります。')">書き方のポイント読み上げ</button>
+        </div>
+    
+        <div class="section">
+            <h2>3. 研究課題の設定</h2>
+            <p>ゼミ活動で取り組んだ具体的な研究課題とその背景を説明しましょう。</p>
+            <p class="example">【記入例】「研究を進める中で、特にZ世代の消費者の情報収集方法が従来の理論では説明できないという課題に直面し、新たな分析フレームワークの必要性を感じました。」</p>
+            <textarea id="research-challenge" placeholder="ここに書きましょう..." data-section-title="3. 研究課題の設定"></textarea>
+            <div class="char-count" id="research-challenge-count">文字数: 0</div>
+            <button class="speech-button" onclick="toggleSpeech(this, '研究課題の設定では、研究テーマの中で特に注目した具体的な問題点を説明しましょう。『〇〇の分野において、△△という課題に着目しました』というように。なぜその課題に着目したのかの背景も述べると良いでしょう。また、既存の理論や研究との違いを示すことで、自分の研究の独自性をアピールできます。')">書き方のポイント読み上げ</button>
+        </div>
+    
+        <div class="section">
+            <h2>4. 研究への取り組み</h2>
+            <p>研究課題に対して、どのような方法で調査・分析を行ったのかを説明しましょう。</p>
+            <p class="example">【記入例】「週2回の輪読会に加えて、独自のアンケート調査を実施し、300人分のデータを収集・分析しました。」</p>
+            <textarea id="research-process" placeholder="ここに書きましょう..." data-section-title="4. 研究への取り組み"></textarea>
+            <div class="char-count" id="research-process-count">文字数: 0</div>
+            <button class="speech-button" onclick="toggleSpeech(this, '研究への取り組みを説明する際は、具体的な研究方法を明確に述べましょう。例えば、『〇〇人を対象にアンケート調査を実施し、△△の分析手法を用いて結果を検証しました』といった具合です。定量的な情報を含めることが重要で、回数、期間、サンプル数などを明記すると良いでしょう。また、使用したツールや分析手法についても具体的に説明すると、より専門性をアピールできます。')">書き方のポイント読み上げ</button>
+        </div>
+    
+        <div class="section">
+            <h2>5. 克服したハードル</h2>
+            <p>研究過程で直面した困難とその解決方法を説明しましょう。</p>
+            <p class="example">【記入例】「統計分析の知識不足に直面しましたが、統計学の基礎から学び直し、SPSSを使用してクラスター分析を行い指導教授への質問や統計解析の勉強会を開催して克服しました。」</p>
+            <textarea id="challenges-overcome" placeholder="ここに書きましょう..." data-section-title="5. 克服したハードル"></textarea>
+            <div class="char-count" id="challenges-overcome-count">文字数: 0</div>
+            <button class="speech-button" onclick="toggleSpeech(this, '研究中に直面した課題とその解決プロセスを説明することは、あなたの問題解決能力をアピールする絶好の機会です。『〇〇という課題に直面しましたが、△△という方法で解決しました』というように具体的に述べましょう。解決のために行った具体的な行動や工夫を記載することで、あなたの積極性や創造性を示すことができます。')">書き方のポイント読み上げ</button>
+        </div>
+    
+        <div class="section">
+            <h2>6. 研究成果と学び</h2>
+            <p>研究の成果と、そこから得られた学びや成長を説明しましょう。</p>
+            <p class="example">【記入例】「この研究を通じて、Z世代特有の消費行動パターンを明らかにし、ゼミ論文で最優秀賞を受賞しました。また、データに基づいて仮説を検証する重要性を学び、今後のビジネス現場でも活かせる分析力を身につけました。」</p>
+            <textarea id="research-results" placeholder="ここに書きましょう..." data-section-title="6. 研究成果と学び"></textarea>
+            <div class="char-count" id="research-results-count">文字数: 0</div>
+            <button class="speech-button" onclick="toggleSpeech(this, '研究成果を説明する際は、具体的な数値やデータを含めると説得りょくが増します。『〇〇の効果が△△%向上することが分かりました』といった具合です。それらの表現が難しい場合は、研究を通じて身についたスキルや能力を説明することも重要です。『データ分析能力が向上し、〇〇のスキルを習得しました』などと述べましょう。最後に、これらの経験や学びを今後のキャリアにどう活かせるかの展望を述べることで、企業に対するあなたの価値をアピールできます。')">書き方のポイント読み上げ</button>
+        </div>
+    </div>
+
+    <button class="save-button" onclick="saveText()">保存</button>
+    <div id="total-char-count">総文字数: 0</div>
+
+    <script>
+        const utterances = new Map();
+
+        function toggleSpeech(button, text) {
+            const rate = document.getElementById('speedControl').value;
+
+            if (utterances.has(button)) {
+                speechSynthesis.cancel();
+                utterances.delete(button);
+                button.textContent = "書き方のポイント読み上げ";
+            } else {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.rate = rate;
+                speechSynthesis.speak(utterance);
+
+                utterances.set(button, utterance);
+                utterance.onend = () => {
+                    utterances.delete(button);
+                    button.textContent = "書き方のポイント読み上げ";
+                };
+                button.textContent = "停止";
+            }
+        }
+
+        function countCharacters() {
+            const textareas = document.querySelectorAll("textarea");
+            let totalChars = 0;
+
+            textareas.forEach(textarea => {
+                const charCountDisplay = document.getElementById(textarea.id + "-count");
+                const length = textarea.value.length;
+                charCountDisplay.textContent = "文字数: " + length;
+                totalChars += length;
+            });
+
+            // 総文字数の表示を更新
+            document.getElementById('total-char-count').textContent = "総文字数: " + totalChars;
+
+            return totalChars;
+        }
+
+        document.querySelectorAll("textarea").forEach((textarea) => {
+            textarea.addEventListener("input", countCharacters);
+        });
+
+        function saveText() {
+            const textareas = document.querySelectorAll("textarea");
+            let content = "";
+            let totalChars = 0;
+
+            textareas.forEach((textarea) => {
+                const length = textarea.value.length;
+                const sectionTitle = textarea.getAttribute('data-section-title');
+                content += `【${sectionTitle}】\n`;
+                content += textarea.value + "\n";
+                content += "文字数: " + length + "\n\n";
+                totalChars += length;
+            });
+
+            content += "総文字数: " + totalChars + "\n";
+
+            const blob = new Blob([content], { type: "text/plain" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "学生時代に力をいれたこと.txt";
+            link.click();
+        }
+    </script>
+</body>
+</html>
