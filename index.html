@@ -3,226 +3,395 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>学生時代に力をいれたことサイト</title>
+    <title>学業で力を入れたことエントリーシート</title>
     <style>
-    /* リセットと基本設定 */
     * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
     }
 
-    /* 基本レイアウト */
     body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f9;
-        color: #333;
-        max-width: 800px;
-        margin: auto;
-        padding: 20px;
-    }
+    font-family: Arial, sans-serif;
+    background-color: #e6f2ff;
+    color: #1a5276;
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    padding-bottom: 80px; /* フッターの高さ分のパディングを追加 */
+}
 
-    /* ヘッダー */
     h1 {
-        color: #344ab0;
+        color: #2980b9;
         text-align: center;
+        margin-bottom: 20px;
     }
 
-    /* セクション共通 */
-    .section {
-        background-color: #fff;
+    .ability-selector {
+        max-width: 800px;
+        margin: 20px auto;
+        font-family: sans-serif;
+    }
+
+    .ability-selector h2 {
+        font-size: 20px;
+        color: #2c3e50;
+        margin-bottom: 15px;
+    }
+
+    #abilitySelect {
+        width: 50%;
+        padding: 8px;
+        font-size: 16px;
+        border: 2px solid #3498db;
+        border-radius: 4px;
+        background-color: #ebf5fb;
+        cursor: pointer;
+    }
+
+    .instruction-section {
+        background-color: #f0f8ff;
         padding: 15px;
         margin: 10px 0;
         border-radius: 5px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
-    /* セクション見出し */
-    .section h2 {
-        font-size: 1.2em;
-        margin-bottom: 10px;
-        color: #3553ad;
-    }
-
-    /* セクション段落 */
-    .section p {
-        margin-bottom: 10px;
-    }
-
-    /* フォーム要素 */
-    textarea {
-        width: 100%;
-        height: 80px;
-        margin-bottom: 5px;
-        padding: 10px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-        resize: none;
-    }
-
-    /* ボタン共通 */
-    .speech-button,
-    .save-button {
-        background-color: #3743ad;
+    .instruction-button {
+        background-color: #2980b9;
         color: white;
         border: none;
-        padding: 10px;
+        padding: 10px 20px;
         border-radius: 5px;
         cursor: pointer;
-        margin-top: 5px;
+        font-size: 1em;
     }
 
-    /* ボタンホバー状態 */
-    .speech-button:hover,
-    .save-button:hover {
-        background-color: #3451a9;
+    .example {
+        background-color: #d6eaf8;
+        padding: 15px;
+        border-radius: 8px;
+        margin: 10px 0;
+        border: 1px solid #5dade2;
     }
 
-    /* 文字数カウンター */
-    .char-count {
-        font-size: 0.9em;
-        color: #666;
+    .example-header {
+        color: #2874a6;
+        font-weight: bold;
+        margin-bottom: 5px;
     }
 
-    /* 合計文字数表示 */
-    #total-char-count {
-        background-color: #3348a1;
-        color: white;
+    .example-text {
+        color: #2c3e50;
+        line-height: 1.6;
+    }
+
+    textarea {
+        width: 100%;
+        border: 2px solid #3498db;
+        border-radius: 4px;
         padding: 10px;
-        border-radius: 5px;
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        margin-top: 10px;
     }
+
+    .speech-button {
+        background-color: #2980b9;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    .footer-section {
+    background-color: #f0f8ff;
+    padding: 15px;
+    display: flex;
+    justify-content: center; /* 全体の子要素を中央揃え */
+    align-items: center; /* 縦方向の中央揃え */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    height: 60px; /* フッターの高さ */
+}
+
+.footer-controls {
+    display: flex;
+    justify-content: center; /* 保存と総文字数を中央揃え */
+    align-items: center; /* 縦方向の中央揃え */
+    gap: 10px; /* 保存と総文字数の間隔 */
+}
+
+.save-button {
+    background-color: #2980b9;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.save-button:hover {
+    background-color: #1a5a87; /* ホバー時の色変更 */
+}
+
+#total-char-count {
+    background-color: transparent;
+    color: #333;
+    padding: 0;
+    font-size: 14px;
+    border-radius: 0;
+}
+
+
 
     /* レスポンシブ対応 */
-    @media screen and (max-width: 768px) {
-        body {
-            padding: 10px;
-        }
-
-        .section {
-            padding: 10px;
-        }
-
-        textarea {
-            height: 100px;
-        }
-    }
-
     @media screen and (max-width: 480px) {
-        body {
-            padding: 5px;
-        }
-
-        h1 {
-            font-size: 1.5em;
-        }
-
-        .section h2 {
-            font-size: 1.1em;
-        }
-
-        .speech-button,
-        .save-button {
-            width: 100%;
-            margin-bottom: 5px;
+        .footer-section, .instruction-section {
+            flex-direction: column;
+            gap: 10px;
         }
     }
     </style>
 </head>
 <body>
-    <h1>学生時代に力をいれたことの作成プログラムサポート</h1>
+    <h1>学業で力を入れたことエントリーシート</h1>
 
-    <div class="section">
-        <h2>読み上げのスピードコントロール</h2>
-        <label for="speedControl">読み上げ速度:</label>
-        <input type="range" id="speedControl" min="0.5" max="2" value="1.4" step="0.1">
+    <div class="ability-selector">
+        <h2>プルダウンで選び、学業での取り組み要素の参考にしてください</h2>       
+        
+            <select id="abilitySelect" onchange="updateExamples()">
+                <option value="">学業での取り組み要素を選択</option>
+                <option value="research">1. 研究への情熱</option>
+                <option value="learning">2. 学習への主体性</option>
+                <option value="seminar">5. ゼミ活動</option>
+                <option value="programming">6. プログラミング学習</option>
+                <option value="openCampus">7. オープンキャンパス取り組み</option>
+            </select>
+    </div>
+
+    <div class="instruction-section">
+        <button id="instructionButton" class="instruction-button" onclick="toggleInstructionSpeech()">使い方説明</button>
+        <div class="speed-control">
+            <label for="speedControl">読み上げ速度:</label>
+            <input type="range" id="speedControl" min="0.5" max="2" value="1.4" step="0.1">
+        </div>
     </div>
 
     <div class="container">
         <div class="section">
-            <h2>1. 学業の成果を40文字以内で表現しましょう</h2>
-            <p>ゼミ活動での研究や学びを結論先行（ＰＲＥＰ法）でひとことで表現します。学んだ専門知識やスキル、研究成果を意識することです。</p>
-            <p class="example">【記入例】「消費者行動を研究するゼミでマーケティングについて研究しました。」</p>
-            <textarea id="academic-point" placeholder="ここに書きましょう..." data-section-title="1. 学業の成果"></textarea>
-            <div class="char-count" id="academic-point-count">文字数: 0</div>
-            <button class="speech-button" onclick="toggleSpeech(this, 'ゼミでの研究テーマや取り組みを、具体的にひとことで表現してください。例えば、『〇〇の研究を通じて、△△に取り組みました。』というように、具体的な取り組み内容を一文で表現することが重要です。抽象的な表現は避け、具体的な研究テーマを明記するようにしてください。')">書き方のポイント読み上げ</button>
+            <h2>1. 学業での主要な取り組みを簡潔に表現</h2>
+            <p>学業における最も重要な取り組みを40文字以内で簡潔に表現します。</p>
+            <div class="example">
+                <div class="example-header">【記入例】</div>
+                <p class="example-text" id="example-prpoint"></p>
+            </div>
+            <textarea id="issue-prpoint" placeholder="ここに書きましょう..." data-section-title="1. 学業での主要な取り組み" rows="4"></textarea>
+            <div class="char-count" id="issue-prpoint-count">文字数: 0</div>
+            <button class="speech-button" onclick="toggleSpeech(this, '学業での最も重要な取り組みを一言で表現します。例えば、「学際的な研究プロジェクトで主導的な役割を果たした」というように、具体的な経験と成果を簡潔に結びつけて表現してください。')">書き方のポイント読み上げ</button>
         </div>
-    
+
         <div class="section">
-            <h2>2. 研究テーマに取り組んだきっかけ</h2>
-            <p>ゼミを選択した理由や、特定の研究テーマに興味を持ったきっかけを説明しましょう。</p>
-            <p class="example">【記入例】「消費者行動論のゼミを選んだのは、SNSが購買行動に与える影響について関心があったためです。特に、若者の購買意思決定プロセスに興味を持ちました。」</p>
-            <textarea id="research-motivation" placeholder="ここに書きましょう..." data-section-title="2. 研究テーマに取り組んだきっかけ"></textarea>
-            <div class="char-count" id="research-motivation-count">文字数: 0</div>
-            <button class="speech-button" onclick="toggleSpeech(this, '研究テーマのきっかけを説明する際は、なぜそのゼミを選んだのか、動機を明確に述べることが大切です。『〇〇に興味があり、△△教授のゼミを選択しました』といった具合です。個人的な関心事と研究テーマとの結びつきを示すと、より説得りょくが増しますよ。また、時系列に沿って興味を持った経緯を説明すると、ストーリー性が出て読み手の印象に残りやすくなります。')">書き方のポイント読み上げ</button>
+            <h2>2. 取り組みの背景と動機</h2>
+            <p>学業での取り組みを選んだ背景と、その動機を詳しく説明しましょう。</p>
+            <div class="example">
+                <div class="example-header">【記入例】</div>
+                <p class="example-text" id="example-awareness"></p>
+            </div>
+            <textarea id="issue-awareness" placeholder="ここに書きましょう..." data-section-title="2. 取り組みの背景と動機" rows="4"></textarea>
+            <div class="char-count" id="issue-awareness-count">文字数: 0</div>
+            <button class="speech-button" onclick="toggleSpeech(this, 'なぜその学術的取り組みに興味を持ったのか、どのような学問的課題や社会的意義を感じたのかを具体的に説明しましょう。')">書き方のポイント読み上げ</button>
         </div>
-    
+
         <div class="section">
-            <h2>3. 研究課題の設定</h2>
-            <p>ゼミ活動で取り組んだ具体的な研究課題とその背景を説明しましょう。</p>
-            <p class="example">【記入例】「研究を進める中で、特にZ世代の消費者の情報収集方法が従来の理論では説明できないという課題に直面し、新たな分析フレームワークの必要性を感じました。」</p>
-            <textarea id="research-challenge" placeholder="ここに書きましょう..." data-section-title="3. 研究課題の設定"></textarea>
-            <div class="char-count" id="research-challenge-count">文字数: 0</div>
-            <button class="speech-button" onclick="toggleSpeech(this, '研究課題の設定では、研究テーマの中で特に注目した具体的な問題点を説明しましょう。『〇〇の分野において、△△という課題に着目しました』というように。なぜその課題に着目したのかの背景も述べると良いでしょう。また、既存の理論や研究との違いを示すことで、自分の研究の独自性をアピールできます。')">書き方のポイント読み上げ</button>
+            <h2>3. 課題の特定と分析</h2>
+            <p>取り組みにおいて直面した学術的な課題とその分析方法を説明しましょう。</p>
+            <div class="example">
+                <div class="example-header">【記入例】</div>
+                <p class="example-text" id="example-discovery"></p>
+            </div>
+            <textarea id="issue-discovery" placeholder="ここに書きましょう..." data-section-title="3. 課題の特定と分析" rows="4"></textarea>
+            <div class="char-count" id="issue-discovery-count">文字数: 0</div>
+            <button class="speech-button" onclick="toggleSpeech(this, '学術的な課題をどのように発見し、分析したのかを具体的に説明しましょう。研究上の問題点、学術的な仮説、分析のアプローチなどを詳しく記述してください。')">書き方のポイント読み上げ</button>
         </div>
-    
+
         <div class="section">
-            <h2>4. 研究への取り組み</h2>
-            <p>研究課題に対して、どのような方法で調査・分析を行ったのかを説明しましょう。</p>
-            <p class="example">【記入例】「週2回の輪読会に加えて、独自のアンケート調査を実施し、300人分のデータを収集・分析しました。」</p>
-            <textarea id="research-process" placeholder="ここに書きましょう..." data-section-title="4. 研究への取り組み"></textarea>
-            <div class="char-count" id="research-process-count">文字数: 0</div>
-            <button class="speech-button" onclick="toggleSpeech(this, '研究への取り組みを説明する際は、具体的な研究方法を明確に述べましょう。例えば、『〇〇人を対象にアンケート調査を実施し、△△の分析手法を用いて結果を検証しました』といった具合です。定量的な情報を含めることが重要で、回数、期間、サンプル数などを明記すると良いでしょう。また、使用したツールや分析手法についても具体的に説明すると、より専門性をアピールできます。')">書き方のポイント読み上げ</button>
+            <h2>4. 主体的な学術的アプローチ</h2>
+            <p>課題に対して、どのような独自の学術的アプローチや工夫を行ったかを説明しましょう。</p>
+            <div class="example">
+                <div class="example-header">【記入例】</div>
+                <p class="example-text" id="example-proactive"></p>
+            </div>
+            <textarea id="proactive-efforts" placeholder="ここに書きましょう..." data-section-title="4. 主体的な学術的アプローチ" rows="4"></textarea>
+            <div class="char-count" id="proactive-efforts-count">文字数: 0</div>
+            <button class="speech-button" onclick="toggleSpeech(this, '独自の研究方法、創造的なアプローチ、または既存の理論への新しい視点など、あなたが主体的に取り組んだ学術的な工夫を説明してください。')">書き方のポイント読み上げ</button>
         </div>
-    
+
         <div class="section">
-            <h2>5. 克服したハードル</h2>
-            <p>研究過程で直面した困難とその解決方法を説明しましょう。</p>
-            <p class="example">【記入例】「統計分析の知識不足に直面しましたが、統計学の基礎から学び直し、SPSSを使用してクラスター分析を行い指導教授への質問や統計解析の勉強会を開催して克服しました。」</p>
-            <textarea id="challenges-overcome" placeholder="ここに書きましょう..." data-section-title="5. 克服したハードル"></textarea>
-            <div class="char-count" id="challenges-overcome-count">文字数: 0</div>
-            <button class="speech-button" onclick="toggleSpeech(this, '研究中に直面した課題とその解決プロセスを説明することは、あなたの問題解決能力をアピールする絶好の機会です。『〇〇という課題に直面しましたが、△△という方法で解決しました』というように具体的に述べましょう。解決のために行った具体的な行動や工夫を記載することで、あなたの積極性や創造性を示すことができます。')">書き方のポイント読み上げ</button>
+            <h2>5. 研究・学習プロセス</h2>
+            <p>具体的にどのような方法で課題に取り組み、学びを深めたのかを説明しましょう。</p>
+            <div class="example">
+                <div class="example-header">【記入例】</div>
+                <p class="example-text" id="example-solution"></p>
+            </div>
+            <textarea id="solution-process" placeholder="ここに書きましょう..." data-section-title="5. 研究・学習プロセス" rows="4"></textarea>
+            <div class="char-count" id="solution-process-count">文字数: 0</div>
+            <button class="speech-button" onclick="toggleSpeech(this, '研究や学習のプロセスを具体的に説明しましょう。文献調査、実験方法、データ分析、理論的考察など、あなたがどのように学びを深めたかを詳しく記述してください。')">書き方のポイント読み上げ</button>
         </div>
-    
+
         <div class="section">
-            <h2>6. 研究成果と学び</h2>
-            <p>研究の成果と、そこから得られた学びや成長を説明しましょう。</p>
-            <p class="example">【記入例】「この研究を通じて、Z世代特有の消費行動パターンを明らかにし、ゼミ論文で最優秀賞を受賞しました。また、データに基づいて仮説を検証する重要性を学び、今後のビジネス現場でも活かせる分析力を身につけました。」</p>
-            <textarea id="research-results" placeholder="ここに書きましょう..." data-section-title="6. 研究成果と学び"></textarea>
-            <div class="char-count" id="research-results-count">文字数: 0</div>
-            <button class="speech-button" onclick="toggleSpeech(this, '研究成果を説明する際は、具体的な数値やデータを含めると説得りょくが増します。『〇〇の効果が△△%向上することが分かりました』といった具合です。それらの表現が難しい場合は、研究を通じて身についたスキルや能力を説明することも重要です。『データ分析能力が向上し、〇〇のスキルを習得しました』などと述べましょう。最後に、これらの経験や学びを今後のキャリアにどう活かせるかの展望を述べることで、企業に対するあなたの価値をアピールできます。')">書き方のポイント読み上げ</button>
+            <h2>6. 成果と学術的成長</h2>
+            <p>取り組みの学術的成果と、そこから得られた学びや成長を説明しましょう。</p>
+            <div class="example">
+                <div class="example-header">【記入例】</div>
+                <p class="example-text" id="example-results"></p>
+            </div>
+            <textarea id="results-learning" placeholder="ここに書きましょう..." data-section-title="6. 成果と学術的成長" rows="4"></textarea>
+            <div class="char-count" id="results-learning-count">文字数: 0</div>
+            <button class="speech-button" onclick="toggleSpeech(this, '研究や学習の具体的な成果、学会発表や論文、新たな知見など、あなたの学術的成長を示す要素を説明してください。さらに、この経験から得られた学術的な洞察や、今後の研究への展望も含めると良いでしょう。')">書き方のポイント読み上げ</button>
         </div>
     </div>
 
-    <button class="save-button" onclick="saveText()">保存</button>
-    <div id="total-char-count">総文字数: 0</div>
+    <div class="footer-section">
+        <div class="footer-controls">
+            <button class="save-button" onclick="saveText()">保存</button>
+            <div id="total-char-count">総文字数: 0</div>
+        </div>
+    </div>
 
     <script>
+        const examples = {
+            research: {
+prpoint: "大学の留学生と日本人学生の異文化コミュニケーション研究で新たな交流モデルを提案",
+awareness: "大学では留学生が急増しており、文化的背景の異なる学生間の効果的なコミュニケーション方法を見出すことが喫緊の課題だと感じました。しかし、既存の交流プログラムでは、SNSを多用する現代の学生の実態に十分に対応できていないことに気づきました。",
+discovery: "留学生と日本人学生のSNS上でのやりとりを分析したところ、従来の対面コミュニケーション理論では説明できない独特の交流パターンを発見しました。例えば、絵文字や短縮語の使用頻度の違いが、文化的背景によって大きく異なることがわかりました。",
+proactive: "社会学、心理学、メディア研究の教授陣と協力し、本学の留学生100名と日本人学生100名を対象に、SNS上のコミュニケーションに関する詳細なインタビューと3か月間のオンライン調査を実施しました。",
+solution: "調査結果を基に、SNSを活用した留学生と日本人学生の異文化交流を促進する新しいフレームワーク「DigiCulture Connect」を開発しました。このフレームワークでは、文化的背景に応じたSNSの使用パターンを考慮し、オンラインでの効果的な対話モデルを提案しています。",
+results: "この研究成果を日本異文化コミュニケーション学会で発表し、若手研究奨励賞を受賞しました。また、本学の留学生センターで「DigiCulture Connect」を試験的に導入したところ、留学生と日本人学生の交流頻度が40%増加し、相互理解度も向上したという結果が得られました。"
+},
+    learning: {
+prpoint: "行動経済学の学際的アプローチでSNS上の消費者行動の新たな分析手法を習得",
+awareness: "経済学の理論だけでは説明しきれないSNS上の消費者の非合理的な行動を理解するためには、心理学や社会学の知見も必要だと感じました。しかし、従来の経済学教育ではこれらの分野を統合的に学ぶ機会が限られていることに気づきました。",
+discovery: "SNS上での消費者行動を観察することで、教科書では説明されていない新たな意思決定プロセスや影響要因を発見しました。特に、バンドワゴン効果やウィンザー効果がSNS上で顕著に現れることを認識しました12。",
+proactive: "経済学の授業に加えて、心理学や社会学の講義も積極的に受講し、それぞれの分野の教授に個別指導を依頼しました。また、最新のSNSマーケティング事例や行動経済学の論文を定期的に読み、理解を深めました。",
+solution: "経済学、心理学、社会学の知見を統合し、SNS上の消費者行動を分析する独自のフレームワークを開発しました。このフレームワークでは、ザイオンス効果、バンドワゴン効果、ハロー効果などのSNSマーケティングに関連する行動経済学の理論を組み込みました1。",
+results: "この新しいアプローチを用いた研究レポートが高く評価され、学内の学生研究コンペで優秀賞を受賞しました。SNSマーケティングにおける行動経済学の実践的な応用可能性を示すことができ、企業の関心も集めることができました。"
+},
+seminar: {
+    prpoint: "ゼミでの学際的プロジェクトマネジメントで地域活性化策について取り組みました。",
+    awareness: "地域の過疎化問題解決には、経済学だけでなく、社会学や都市計画の知識が不可欠だと考えました。同時に、多様な背景を持つメンバーの協働が課題になると予想しました。",
+    discovery: "ゼミメンバーは、知識や能力がことなるメンバーが多く、それぞれで、用語の解釈や問題へのアプローチに大きな差があることを発見しました。",
+    proactive: "各メンバーの総力を集大成した取り組みが必要だと考え、一人ひとり各メンバーの強味を活かしたタスク分担を提案し、週2回の勉強会を主催して知識の共有を図りました。また、地域住民へのヒアリングを毎週行い、現場の声を収集しました。",
+    solution: "皆のタスクを見える化できるタスク管理ツールを作成し、データをクラウドにあげ情報共有と進捗管理を実現。さらに、月1回の地域住民への提案と意見交換会を設け、提案の実現可能性を高めました。",
+    results: "提案した地域活性化策が市役所に採用され、学内のゼミナール大会で最優秀賞を受賞。学際的アプローチの有効性と、多様性を活かしたチームマネジメントの重要性を学びました。"
+  },
+  programming: {
+    prpoint: "独学でAIを活用した地域特産品販促アプリを開発し、実用化に成功",
+    awareness: "地域経済の活性化には、最新のIT技術の活用が不可欠だと感じました。しかし、大学のカリキュラムだけでは実践的なスキルを得るには不十分だと気づきました。",
+    discovery: "プログラミングの基礎学習だけでなく、ユーザー体験（UX）デザインやデータ分析スキルの重要性を認識しました。",
+    proactive: "オンライン学習プラットフォームで300時間以上の学習を行い、並行して地元企業5社にヒアリングを実施。実際のニーズに基づいたアプリ開発に着手しました。",
+    solution: "機械学習を用いた購買傾向分析機能と、ARを活用した商品紹介機能を組み込んだスマートフォンアプリを開発。ユーザビリティテストを20名以上に実施し、改善を重ねました。",
+    results: "開発したアプリが県の特産品振興プロジェクトに採用され、1年間で10,000ダウンロードを達成。地域特産品の売上が前年比15%増加に貢献し、地元メディアでも取り上げられました。"
+  },
+  openCampus: {
+    prpoint: "オープンキャンパスで革新的なVR体験型企画を実施し、志願者増に貢献",
+    awareness: "従来の講義形式の説明会では、大学の魅力を十分に伝えきれていないと感じました。特に、実際の研究活動や学生生活のイメージが伝わりにくいことが課題でした。",
+    discovery: "高校生の興味を引く内容と学術的な深さの両立が難しく、また、短時間で大学の特徴を伝える効果的な方法が必要だと気づきました。",
+    proactive: "IT系のサークルと協力し、VR技術を活用した大学キャンパスツアーを企画。また、各学部の代表的な研究をVR空間で体験できるコンテンツを開発しました。",
+    solution: "360度カメラで撮影した臨場感あるキャンパスツアーと、研究室での実験や海外フィールドワークをVRで体験できるブースを設置。さらに、在学生とのリアルタイムQ&Aセッションを組み込みました。",
+    results: "参加した高校生の満足度が前年比30%向上し、志願者数が15%増加。この企画が全国の教育関係者から注目を集め、文部科学省主催の教育イノベーションコンテストで優秀賞を受賞しました。"
+  }
+};
+
+        const examples_base = {...examples};
+
+        function updateExamples() {
+            const selected = document.getElementById('abilitySelect').value;
+            if (!selected) return;
+
+            const example = examples[selected] || examples['research'];
+            
+            document.getElementById('example-prpoint').textContent = example.prpoint;
+            document.getElementById('example-awareness').textContent = example.awareness;
+            document.getElementById('example-discovery').textContent = example.discovery;
+            document.getElementById('example-proactive').textContent = example.proactive;
+            document.getElementById('example-solution').textContent = example.solution;
+            document.getElementById('example-results').textContent = example.results;
+            
+            // テキストエリアをクリア
+            document.querySelectorAll('textarea').forEach(textarea => textarea.value = '');
+
+            // 文字数を更新
+            countCharacters();
+        }
+
+        // 音声合成用の変数を追加
+let instructionUtterance = null;
+
+function toggleInstructionSpeech() {
+    const button = document.getElementById('instructionButton');
+    const rate = document.getElementById('speedControl').value;
+
+    if (instructionUtterance) {
+        speechSynthesis.cancel();
+        instructionUtterance = null;
+        button.textContent = "使い方説明";
+    } else {
+        const instructionText = `
+        学業で力を入れたことエントリーシートへようこそ。
+        このツールは、学術的な取り組みを6つのステップで効果的に表現するためのガイドです。
+        
+        1. まず、あなたの学業での最も重要な取り組みを40文字程度で簡潔に表現します。
+        2. 次に、その取り組みを選んだ背景と動機を説明します。
+        3. 直面した学術的な課題とその分析方法を記述します。
+        4. 課題への主体的で独創的なアプローチを説明します。
+        5. 研究や学習のプロセスを具体的に示します。
+        6. 最後に、得られた成果と学術的な成長を説明します。
+
+        各セクションの文字数は自動でカウントされ、下部に総文字数が表示されます。
+        作成した内容は保存ボタンでテキストファイルとして保存できます。
+
+        あなたの学術的な成長と情熱を魅力的に伝えるエントリーシート作成を始めましょう。
+        `;
+
+        instructionUtterance = new SpeechSynthesisUtterance(instructionText);
+        instructionUtterance.rate = rate;
+        instructionUtterance.onend = () => {
+            instructionUtterance = null;
+            button.textContent = "使い方説明";
+        };
+        speechSynthesis.speak(instructionUtterance);
+        button.textContent = "停止";
+    }
+}
+
         const utterances = new Map();
 
-        function toggleSpeech(button, text) {
-            const rate = document.getElementById('speedControl').value;
+        let sectionUtterance = null;
 
-            if (utterances.has(button)) {
-                speechSynthesis.cancel();
-                utterances.delete(button);
-                button.textContent = "書き方のポイント読み上げ";
-            } else {
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.rate = rate;
-                speechSynthesis.speak(utterance);
+function toggleSpeech(button, text) {
+    const rate = document.getElementById('speedControl').value;
 
-                utterances.set(button, utterance);
-                utterance.onend = () => {
-                    utterances.delete(button);
-                    button.textContent = "書き方のポイント読み上げ";
-                };
-                button.textContent = "停止";
-            }
-        }
+    if (sectionUtterance) {
+        speechSynthesis.cancel();
+        sectionUtterance = null;
+        button.textContent = "書き方のポイント読み上げ";
+    } else {
+        sectionUtterance = new SpeechSynthesisUtterance(text);
+        sectionUtterance.rate = rate;
+        sectionUtterance.onend = () => {
+            sectionUtterance = null;
+            button.textContent = "書き方のポイント読み上げ";
+        };
+        speechSynthesis.speak(sectionUtterance);
+        button.textContent = "停止";
+    }
+}
 
         function countCharacters() {
             const textareas = document.querySelectorAll("textarea");
@@ -235,7 +404,6 @@
                 totalChars += length;
             });
 
-            // 総文字数の表示を更新
             document.getElementById('total-char-count').textContent = "総文字数: " + totalChars;
 
             return totalChars;
@@ -264,9 +432,22 @@
             const blob = new Blob([content], { type: "text/plain" });
             const link = document.createElement("a");
             link.href = URL.createObjectURL(blob);
-            link.download = "学生時代に力をいれたこと.txt";
+            link.download = "学業エントリーシート.txt";
             link.click();
         }
+
+        // 初期化
+        document.addEventListener('DOMContentLoaded', () => {
+            updateExamples();
+        });
+        function adjustContentPadding() {
+    const footer = document.querySelector('.footer-section');
+    const footerHeight = footer.offsetHeight;
+    document.body.style.paddingBottom = `${footerHeight + 20}px`;
+}
+
+window.addEventListener('load', adjustContentPadding);
+window.addEventListener('resize', adjustContentPadding);
     </script>
 </body>
 </html>
